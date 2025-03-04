@@ -1,2 +1,2 @@
 #!/bin/bash
-python cluster_visualisation/dashboard_ocean_cluster_visualisation.py
+python dashboard_ocean_cluster_visualisation.py

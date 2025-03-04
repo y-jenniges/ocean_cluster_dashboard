@@ -1,7 +1,6 @@
 # Ocean cluster visualisation
 
-A plotting tool for ocean regions generated following the procedure in Jenniges et al.: Systematic definition and validation of 3-dimensional physical and biogeochemical ocean
-3 clusters using unsupervised machine learning. 
+A plotting tool for ocean regions generated following the procedure in Jenniges et al.: Systematic definition and validation of 3-dimensional physical and biogeochemical ocean clusters using unsupervised machine learning. 
 
 
 Show dashboard in the notebook:

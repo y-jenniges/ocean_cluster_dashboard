@@ -229,7 +229,8 @@ margin = 5
 # df.loc[df.uncertainty < 50, "color"] = df[df.uncertainty < 50].final_label.map(color_map_g)
 # df.loc[df.uncertainty >= 50, "color"] = "#ff0000"
 
-df = pd.read_csv("../output_final/dbscan/uncertainty/volume_nemi_iteration67_uncertainty.csv").rename(columns={"label_color": "color"})
+df = pd.read_csv(
+    "../ocean_cluster_validation/output_final/dbscan/uncertainty/volume_nemi_iteration67_uncertainty.csv").rename(columns={"label_color": "color"})
 data_label = "final_label"  # final_label uncertainty
 df = df[df.final_label != 10]
 # df = df[df.final_label.isin([29, 17, 26, 4, 21, 37])]

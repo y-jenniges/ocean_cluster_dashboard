@@ -5,6 +5,7 @@ dependencies:
   - python=3.9
   - dash
   - gsw
+  - jupyter-dash
   - numpy
   - pandas
   - plotly

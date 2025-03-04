@@ -349,4 +349,5 @@ def update(figure_geo, figure_umap, figure_depth, figure_ts, clickdata_depth, cl
 
 # run app
 if __name__ == "__main__":
-    app.run_server(host="127.0.0.1", port=8050, debug=True)
+    # app.run_server(host="127.0.0.1", port=8050, debug=True)
+    app.run_server(host="0.0.0.0", port=8050, debug=True)

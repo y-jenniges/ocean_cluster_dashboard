@@ -182,102 +182,35 @@ def update_ts(column="label", hide_noise=True, label_selection=None):
     return figure_ts
 
 
-# plot settings
+# Plot settings
 scatter_size = 2
 margin = 5
 
-# load file to visualise
-# df = pd.read_csv("../output_final/dbscan/uncertainty/UMAP_DBSCAN/umap_dbscan_7.csv")
-# df = utils.color_code_labels(df)
+# Load data
+df = pd.read_csv("cluster_set.csv")
+data_label = "label"
+df = df[df[data_label] != 10]
 
-# df = pd.read_csv("../output_final/dbscan/post_processing/re-assigned_A1_R1.csv")
-# data_label = "label"
-
-# df = pd.read_csv("../output_final/kmeans_labels.csv")
-# df = df[df.n_clusters == 2].rename(columns={"label_original": "label"})
-# df = df[df.n_clusters == 10].rename(columns={"label_embedding": "label"})
-
-# df = pd.read_csv("../output_final/ward_labels.csv")
-# df = df[df.n_clusters == 2].rename(columns={"label_original": "label"})
-# df = df[df.n_clusters == 24].rename(columns={"label_embedding": "label"})
-
-# df = utils.color_code_labels(df)
-# df[["P_TEMPERATURE", "P_SALINITY", "P_OXYGEN", "P_NITRATE", "P_SILICATE", "P_PHOSPHATE"]] = 0
-
-# df = pd.read_csv("../output_final/dbscan/uncertainty/uncertainty.csv")
-# df.uncertainty = round(df.uncertainty)
-# cmap = matplotlib.cm.get_cmap("viridis")
-# color_map = {label: matplotlib.colors.rgb2hex(cmap(label/100)) for label in np.sort(df['uncertainty'].unique())}
-# df["color"] = df["uncertainty"].map(color_map)
-# data_label = "uncertainty"
-
-# df = pd.read_csv("../nemi_iteration67_uncertainty.csv")
-# cmap = matplotlib.cm.get_cmap("viridis")
-# color_map = {label: matplotlib.colors.rgb2hex(cmap(label / 100)) for label in np.sort(df['uncertainty'].unique())}
-# df["color"] = df["uncertainty"].map(color_map)
-# data_label = "uncertainty"
-
-# df = pd.read_csv("../nemi_iteration67_uncertainty.csv").rename(columns={"label_color": "color"})
-# data_label = "final_label"
-# df = df[df.final_label != 10]
-# df = df[(df.final_label != 10) & (df.uncertainty < 10)]
-# df = df[df.final_label.isin([65, 68, 72])]
-
-# cmap = matplotlib.cm.get_cmap("gray")
-# color_map_g = {label: matplotlib.colors.rgb2hex(cmap(label / 100)) for label in
-#                np.sort(df[df.uncertainty < 50].final_label.unique())}
-# df.loc[df.uncertainty < 50, "color"] = df[df.uncertainty < 50].final_label.map(color_map_g)
-# df.loc[df.uncertainty >= 50, "color"] = "#ff0000"
-
-df = pd.read_csv(
-    "../ocean_cluster_validation/output_final/dbscan/uncertainty/volume_nemi_iteration67_uncertainty.csv").rename(columns={"label_color": "color"})
-data_label = "final_label"  # final_label uncertainty
-df = df[df.final_label != 10]
-# df = df[df.final_label.isin([29, 17, 26, 4, 21, 37])]
-# df = df[df.uncertainty < 50]
-# cmap = matplotlib.cm.get_cmap("gray")
-# color_map_g = {label: matplotlib.colors.rgb2hex(cmap(label / 100)) for label in
-#                np.sort(df[df.uncertainty < 50].final_label.unique())}
-# df.loc[df.uncertainty < 50, "color"] = df[df.uncertainty < 50].final_label.map(color_map_g)
-# df.loc[df.uncertainty >= 50, "color"] = "#ff0000"
-# df.loc[df.uncertainty >= 50, "final_label"] = "500"
-# cmap = matplotlib.cm.get_cmap("hot")
-# df["color"] = df.uncertainty.map(lambda x: matplotlib.colors.rgb2hex(cmap(x/100)))
-
-
-# df = pd.read_csv("../areaWeight_nemi_iteration5_uncertainty.csv").rename(columns={"label_color": "color"})
-# data_label = "final_label"
-# df = df[df.final_label != 9]
-# df = df[(df.final_label != 9) & (df.uncertainty >= 50)]
-# df = df[df.final_label.isin([65, 68, 73])]
-
-# df = pd.read_csv("../areaWeight_nemi_iteration5_uncertainty.csv")
-# cmap = matplotlib.cm.get_cmap("viridis")
-# color_map = {label: matplotlib.colors.rgb2hex(cmap(label / 100)) for label in np.sort(df['uncertainty'].unique())}
-# df["color"] = df["uncertainty"].map(color_map)
-# df = df[df["uncertainty"] >= 50]
-# data_label = "uncertainty"
-
-# add cluster size information
+# Add cluster size information
 sizes = df.final_label.value_counts().reset_index()
-df = pd.merge(df, sizes, on="final_label", how="left")
+df = pd.merge(df, sizes, on=data_label, how="left")
 
-# add information required for TS diagrams
+# Compute and add information required for TS diagram
 df["pressure"] = gsw.p_from_z(-1 * df["LEV_M"], df["LATITUDE"])
 df["abs_salinity"] = gsw.SA_from_SP(df["P_SALINITY"], df["pressure"], df["LONGITUDE"], df["LATITUDE"])
 df["cons_temperature"] = gsw.CT_from_pt(df["abs_salinity"], df["P_TEMPERATURE"])
 df["rho"] = gsw.rho(df["abs_salinity"], df["cons_temperature"], df["pressure"])
 
-# define depths
+# Define depth levels
 depths = np.sort(df.LEV_M.unique())
 cur_depth_idx = 0
 
-# figures
+# Define figures
 fig_geo, fig_umap = update_geo_and_umap(column=data_label, hide_noise=True, label_selection=[])
 fig_depth = update_depth(column=data_label, hide_noise=True, depth_idx=cur_depth_idx)
 fig_ts = update_ts(column=data_label, hide_noise=True, label_selection=[])
 
-# dash app and layout
+# Dash app and layout
 app = Dash(__name__)
 app.layout = html.Div([
     html.Div(
@@ -412,45 +345,6 @@ def update(figure_geo, figure_umap, figure_depth, figure_ts, clickdata_depth, cl
         new_ts_fig = update_ts(label_selection=new_selected_labels, column=data_label)
 
     return new_geo_fig, new_umap_fig, new_depth_fig, new_ts_fig, new_params
-
-
-# import pandas as pd
-# import numpy as np
-# data_label = "label_embedding"
-# # data_label = "label_original"
-# labels = pd.read_csv("data/dbscan_labels.csv")
-# df_in = pd.read_csv("data/df_wide_knn.csv")
-def get_info(cluster_label, labels, df_in, eps=0.10983051, min_samples=4):
-    # filter for the correct hyperparameter combination
-    temp = labels[(np.round(labels.eps, 8) == np.round(eps, 8)) & (labels.min_samples == min_samples)]
-    all_labels = temp[data_label].unique()  # find all labels of that clustering
-
-    # check if cluster label exists
-    if cluster_label in all_labels:
-        temp = temp[temp[data_label] == cluster_label]  # filter out the cluster label
-        # merge labels to parameter information
-        temp_merged = pd.merge(left=temp, right=df_in, how="left", on=["LATITUDE", "LONGITUDE", "LEV_M"])
-        with pd.option_context('display.max_rows', None, 'display.max_columns', None):
-            print(f"Information on cluster label {cluster_label}")
-            print(temp_merged[[x for x in temp_merged.columns
-                               if x not in ["eps", "min_samples", "label_embedding", "label_original"]]].describe())
-
-        return temp_merged
-    else:
-        print(f"Cluster label {cluster_label} not found.")
-        return
-
-
-def difference_between_two_labels(a, b, labels, df_in, eps=0.10983051, min_samples=4):
-    a_data = get_info(a, labels, df_in, eps, min_samples)
-    b_data = get_info(b, labels, df_in, eps, min_samples)
-
-    diff = (a_data.describe() - b_data.describe())
-    with pd.option_context('display.max_rows', None, 'display.max_columns', None):
-        print(f"Information on the difference of cluster labels {a} and {b}")
-        print(diff[[x for x in a_data.columns if x not in ["eps", "min_samples", "label_embedding", "label_original"]]])
-
-    # return diff
 
 
 # run app

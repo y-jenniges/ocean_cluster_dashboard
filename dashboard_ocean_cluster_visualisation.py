@@ -174,8 +174,8 @@ def update_ts(column="label", hide_noise=True, label_selection=None):
     ))
 
     figure_ts.update_layout(margin=dict(l=margin, r=margin, t=margin, b=margin),
-                            xaxis=dict(title='Absolute salinity [g/kg]', titlefont=dict(size=14)),
-                            yaxis=dict(title='Conservative temperature [°C]', titlefont=dict(size=14)),
+                            xaxis=dict(title={"text": 'Absolute salinity [g/kg]', "font": {"size": 14}}),
+                            yaxis=dict(title={"text": 'Conservative temperature [°C]', "font": {"size": 14}}),
                             showlegend=False,
                             uirevision=True)
 
@@ -192,7 +192,7 @@ data_label = "label"
 df = df[df[data_label] != 10]
 
 # Add cluster size information
-sizes = df.final_label.value_counts().reset_index()
+sizes = df[data_label].value_counts().reset_index()
 df = pd.merge(df, sizes, on=data_label, how="left")
 
 # Compute and add information required for TS diagram
@@ -349,4 +349,4 @@ def update(figure_geo, figure_umap, figure_depth, figure_ts, clickdata_depth, cl
 
 # run app
 if __name__ == "__main__":
-    app.run_server(host="0.0.0.0", port=8050, debug=True)
+    app.run_server(host="127.0.0.1", port=8050, debug=True)

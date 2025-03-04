@@ -1,2 +1,2 @@
-#!/usr/bin/bash
-python dashbboard_ocean_cluster_visualisation.py
+#!/bin/bash
+python cluster_visualisation/dashboard_ocean_cluster_visualisation.py

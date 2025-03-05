@@ -9,6 +9,6 @@ dependencies:
   - pandas
   - plotly
   - ipywidgets
-  - jupyterlab>=4.4.4
+  - jupyterlab
   - voila
 

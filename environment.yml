@@ -11,4 +11,5 @@ dependencies:
   - ipywidgets=8.1.5
   - voila=0.5.8
   - jupyterlab=4.3.5
+  - jupyterlab_widgets 
  # - ipyvolume

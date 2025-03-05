@@ -12,7 +12,10 @@ Only display dashboard:
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/y-jenniges/ocean_cluster_dashboard/HEAD?urlpath=apps%2Fdashboard_ocean_cluster_visualisation.ipynb)
 
  https://mybinder.org/v2/gh/y-jenniges/ocean_cluster_dashboard/HEAD?urlpath=voila%2Frender%2Fdashboard_ocean_cluster_visualisation.ipynb
+ 
  https://mybinder.org/v2/gh/y-jenniges/ocean_cluster_dashboard/HEAD?urlpath=voila/render/dashboard_ocean_cluster_visualisation.ipynb
+
+  https://mybinder.org/v2/gh/y-jenniges/ocean_cluster_dashboard/HEAD?urlpath=voila/notebooks/dashboard_ocean_cluster_visualisation.ipynb
 
 
   https://mybinder.org/v2/gh/y-jenniges/ocean_cluster_dashboard/HEAD?urlpath=voila/render/test.ipynb

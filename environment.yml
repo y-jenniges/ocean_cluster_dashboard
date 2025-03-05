@@ -12,3 +12,4 @@ dependencies:
   - appmode
   - plotly::jupyterlab-dash
   - jupyter-dash
+  - ipywidgets  

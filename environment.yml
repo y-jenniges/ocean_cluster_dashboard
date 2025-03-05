@@ -12,4 +12,5 @@ dependencies:
   - appmode
   - plotly::jupyterlab-dash
   - jupyter-dash
-  - ipywidgets  
+  - ipywidgets
+  - jupyter-server-proxy

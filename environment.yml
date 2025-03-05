@@ -10,5 +10,8 @@ dependencies:
   - plotly
   - ipyvolume
   - appmode
+  - jupyterlab
+  - jupyterlab-dash
   - plotly::jupyterlab-dash
+  - jupyterlab-plotly
   - voila

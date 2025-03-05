@@ -8,10 +8,7 @@ dependencies:
   - numpy
   - pandas
   - plotly
-  - ipyvolume
   - ipywidgets
-  - appmode
   - jupyterlab>=4.4.4
-  - plotly::jupyterlab-dash
   - voila
 

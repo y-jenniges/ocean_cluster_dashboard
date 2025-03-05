@@ -9,8 +9,9 @@ dependencies:
   - pandas
   - plotly
   - ipyvolume
+  - ipywidgets
   - appmode
-  - jupyterlab
+  - jupyterlab>=4.4.4
   - jupyterlab-dash
   - plotly::jupyterlab-dash
   - voila

@@ -1,3 +1,3 @@
 #!/bin/bash
-
+jupyter lab build
 python -c "import ipyvolume; ipyvolume.datasets.aquariusA2.fetch()"

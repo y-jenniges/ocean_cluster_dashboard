@@ -12,4 +12,5 @@ dependencies:
   - voila=0.5.8
   - jupyterlab=4.3.5
   - jupyterlab_widgets 
+  - mathjax
  # - ipyvolume

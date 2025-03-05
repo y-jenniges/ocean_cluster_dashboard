@@ -10,3 +10,5 @@ Show dashboard in the notebook:
 Only display dashboard:
 
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/y-jenniges/ocean_cluster_dashboard/HEAD?urlpath=apps%2Fdashboard_ocean_cluster_visualisation.ipynb)
+
+test: https://mybinder.org/v2/gh/y-jenniges/ocean_cluster_dashboard/HEAD?urlpath=voila%2Frender%2Fdashboard_ocean_cluster_visualisation.ipynb

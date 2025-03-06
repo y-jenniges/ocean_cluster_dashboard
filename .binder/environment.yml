@@ -11,7 +11,7 @@ dependencies:
   - ipywidgets #=8.1.5
   #- voila #=0.5.8
   #- jupyterlab #=4.3.5
-  - plotly::dash-jupyterlab
+  #- plotly::dash-jupyterlab
   - pip:
     - nbserverproxy
     - jupyter-server-proxy

@@ -21,3 +21,5 @@ Only display dashboard:
   https://mybinder.org/v2/gh/y-jenniges/ocean_cluster_dashboard/HEAD?urlpath=voila/render/test.ipynb
 
 https://mybinder.org/v2/gh/y-jenniges/ocean_cluster_dashboard/HEAD?urlpath=%2Fproxy%2F5006%2Fdashboard_ocean_cluster_visualisation.ipynb
+
+https://mybinder.org/v2/gh/y-jenniges/ocean_cluster_dashboard/HEAD?urlpath=/proxy/5006/dash-app

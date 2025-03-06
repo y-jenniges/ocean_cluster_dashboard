@@ -3,14 +3,14 @@ channels:
   - conda-forge
 dependencies:
   - python=3.9
-  - dash=2.18.2
-  - plotly=6.0.0
-  - pandas=2.2.3
-  - numpy=2.0.2
-  - gsw=3.6.19
-  - ipywidgets=8.1.5
-  - voila=0.5.8
-  - jupyterlab=4.3.5
+  - dash #=2.18.2
+  - plotly #=6.0.0
+  - pandas #=2.2.3
+  - numpy #=2.0.2
+  - gsw #=3.6.19
+  - ipywidgets #=8.1.5
+  #- voila #=0.5.8
+  #- jupyterlab #=4.3.5
   - plotly::dash-jupyterlab
   - pip:
     - nbserverproxy

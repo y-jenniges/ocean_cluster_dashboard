@@ -12,6 +12,5 @@ dependencies:
   #- voila #=0.5.8
   #- jupyterlab #=4.3.5
   #- plotly::dash-jupyterlab
-  - pip:
-    - nbserverproxy
-    - jupyter-server-proxy
+  - jupyter-server-proxy
+  - nbserverproxy

@@ -3,10 +3,10 @@
 # Enable nbserverproxy
 jupyter server extension enable --sys-prefix nbserverproxy
 
-# Install the bokeh server extension so that Bokeh launches at startup
+# Install the dash server extension so that dash launches at startup
 mv .binder/dashserverextension.py ${NB_PYTHON_PREFIX}/lib/python*/site-packages/
 
-# Enable Bokeh extension
+# Enable dash extension
 jupyter server extension enable --sys-prefix dashserverextension
 
 #jupyter lab clean

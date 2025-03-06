@@ -2,8 +2,8 @@
 
 # Enable nbserverproxy
 # jupyter server extension enable --sys-prefix nbserverproxy
-echo "Start server proxy"
-pip install jupyter-server-proxy
+#echo "Start server proxy"
+#pip install jupyter-server-proxy
 
 # Install the dash server extension so that dash launches at startup
 echo "Install extension"

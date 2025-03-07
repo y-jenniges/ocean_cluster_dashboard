@@ -203,7 +203,7 @@ scatter_size = 2
 margin = 5
 
 # Load data
-df = pd.read_csv("dash-app/cluster_set.csv")
+df = pd.read_csv("cluster_set.csv")
 data_label = "label"
 df = df[df[data_label] != 10]
 

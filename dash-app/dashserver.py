@@ -379,4 +379,5 @@ display(HTML("""
 # app.run_server(mode="inline", host="127.0.0.1", port=8060, debug=True)  # For local windows machine
 # app.run_server(mode="inline", debug=True)  # For Binder
 # app.run_server(mode="inline", host="0.0.0.0", port=8050, debug=True)
-app.run_server(host="0.0.0.0", port=5006, debug=True)
+# app.run_server(host="0.0.0.0", port=5006, debug=True)
+server = app.server  # Required for gunicorn

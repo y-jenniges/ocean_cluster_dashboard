@@ -9,12 +9,15 @@ from IPython.display import display, HTML
 
 def update_geo_and_umap(column="label", hide_noise=True, label_selection=None):
     """ Update the 3d geoplot and the UMAP plot. """
-    # Update list of selected labels
-    if label_selection is None:
-        label_selection = []
-
     # Copy dataframe
     df_display = df.copy()
+
+    # Update list of selected labels
+    if not label_selection:
+        label_selection = []
+    elif not isinstance(label_selection, list):
+        label_selection = list(label_selection)
+    print(f"Label selection: {label_selection}")
 
     # Determine labels to display
     if label_selection:
@@ -378,8 +381,3 @@ display(HTML("""
 server = app.server  # Required for gunicorn
 if __name__ == "__main__":
     app.run_server(debug=True)
-
-# app.run_server(mode="inline", host="127.0.0.1", port=8060, debug=True)  # For local windows machine
-# app.run_server(mode="inline", debug=True)  # For Binder
-# app.run_server(mode="inline", host="0.0.0.0", port=8050, debug=True)
-# app.run_server(host="0.0.0.0", port=5006, debug=True)

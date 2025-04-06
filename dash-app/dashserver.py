@@ -373,10 +373,11 @@ display(HTML("""
 </style>
 """))
 
-# server = app.server  # Required for gunicorn
+
 # Run app
 if __name__ == "__main__":
     app.run_server(debug=True, host='0.0.0.0', port=8080)
+    server = app.server  # Required for gunicorn
 
 # app.run_server(mode="inline", host="127.0.0.1", port=8060, debug=True)  # For local windows machine
 # app.run_server(mode="inline", debug=True)  # For Binder

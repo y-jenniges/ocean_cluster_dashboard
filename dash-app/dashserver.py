@@ -310,7 +310,7 @@ def update(figure_geo, figure_umap, figure_depth, figure_ts, clickdata_depth, cl
         new_params["depth_idx"] = new_depth_idx
 
     # If a click happened in the depth label plot, show that specific cluster only (select and deselect?)
-    if clickdata_sel_depth:
+    elif clickdata_sel_depth:
         if selection_state == "select all":
             new_selected_labels = []
         else:

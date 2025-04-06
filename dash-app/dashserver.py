@@ -134,31 +134,6 @@ def update_ts(column="label", hide_noise=True, label_selection=None):
     if hide_noise:
         df_display = df_display[df_display[column] != -1]
 
-    # Define salinity and temperature limits
-    smin = df_display["abs_salinity"].min() - (0.01 * df_display["abs_salinity"].min())
-    smax = df_display["abs_salinity"].max() + (0.01 * df_display["abs_salinity"].max())
-    tmin = df_display["cons_temperature"].min() - (0.1 * df_display["cons_temperature"].max())
-    tmax = df_display["cons_temperature"].max() + (0.1 * df_display["cons_temperature"].max())
-
-    # Number of gridcells in the x and y dimensions
-    xdim = int(round((smax - smin) / 0.1 + 1, 0))
-    ydim = int(round((tmax - tmin) / 0.1 + 1, 0))
-
-    # Define empty grid
-    dens = np.zeros((ydim, xdim))
-
-    # Temperature and salinity vectors
-    si = np.linspace(1, xdim - 1, xdim) * 0.1 + smin
-    ti = np.linspace(1, ydim - 1, ydim) * 0.1 + tmin
-
-    # Fill grid with densities
-    for j in range(0, int(ydim)):
-        for i in range(0, int(xdim)):
-            dens[j, i] = gsw.rho(si[i], ti[j], 0)
-
-    # Convert density to sigma-t
-    dens = dens - 1000
-
     # Define figure
     figure_ts = go.Figure()
 
@@ -212,11 +187,37 @@ df = df[df[data_label] != 10]
 sizes = df[data_label].value_counts().reset_index()
 df = pd.merge(df, sizes, on=data_label, how="left")
 
-# Compute and add information required for TS diagram
+# Compute and add information required for TS diagram -----------------
 df["pressure"] = gsw.p_from_z(-1 * df["LEV_M"], df["LATITUDE"])
 df["abs_salinity"] = gsw.SA_from_SP(df["P_SALINITY"], df["pressure"], df["LONGITUDE"], df["LATITUDE"])
 df["cons_temperature"] = gsw.CT_from_pt(df["abs_salinity"], df["P_TEMPERATURE"])
 df["rho"] = gsw.rho(df["abs_salinity"], df["cons_temperature"], df["pressure"])
+
+# Define salinity and temperature limits
+smin = df["abs_salinity"].min() - (0.01 * df["abs_salinity"].min())
+smax = df["abs_salinity"].max() + (0.01 * df["abs_salinity"].max())
+tmin = df["cons_temperature"].min() - (0.1 * df["cons_temperature"].max())
+tmax = df["cons_temperature"].max() + (0.1 * df["cons_temperature"].max())
+
+# Number of gridcells in the x and y dimensions
+xdim = int(round((smax - smin) / 0.1 + 1, 0))
+ydim = int(round((tmax - tmin) / 0.1 + 1, 0))
+
+# Define empty grid
+dens = np.zeros((ydim, xdim))
+
+# Temperature and salinity vectors
+si = np.linspace(1, xdim - 1, xdim) * 0.1 + smin
+ti = np.linspace(1, ydim - 1, ydim) * 0.1 + tmin
+
+# Fill grid with densities
+for j in range(0, int(ydim)):
+    for i in range(0, int(xdim)):
+        dens[j, i] = gsw.rho(si[i], ti[j], 0)
+
+# Convert density to sigma-t
+dens = dens - 1000
+# -------------------------------------------------------------------
 
 # Define depth levels
 depths = np.sort(df.LEV_M.unique())
@@ -373,7 +374,6 @@ display(HTML("""
     }
 </style>
 """))
-
 
 # Run app
 server = app.server  # Required for gunicorn

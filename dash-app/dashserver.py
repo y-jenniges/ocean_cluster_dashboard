@@ -15,8 +15,6 @@ def update_geo_and_umap(column="label", hide_noise=True, label_selection=None):
     # Update list of selected labels
     if not label_selection:
         label_selection = []
-    elif not isinstance(label_selection, list):
-        label_selection = list(label_selection)
     print(f"Label selection: {label_selection}")
 
     # Determine labels to display

@@ -359,9 +359,6 @@ def update(figure_geo, figure_umap, figure_depth, figure_ts, clickdata_depth, cl
     return new_geo_fig, new_umap_fig, new_depth_fig, new_ts_fig, new_params
 
 
-# Run app
-# if __name__ == "__main__":
-
 # Increase width and height of display
 display(HTML("""
 <style>
@@ -376,7 +373,10 @@ display(HTML("""
 </style>
 """))
 
-server = app.server  # Required for gunicorn
+# server = app.server  # Required for gunicorn
+# Run app
+if __name__ == "__main__":
+    app.run_server(debug=True, host='0.0.0.0', port=8080)
 
 # app.run_server(mode="inline", host="127.0.0.1", port=8060, debug=True)  # For local windows machine
 # app.run_server(mode="inline", debug=True)  # For Binder

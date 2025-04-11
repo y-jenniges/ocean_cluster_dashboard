@@ -181,7 +181,7 @@ margin = 5
 # Load data
 df = pd.read_csv("cluster_set.csv")
 data_label = "label"
-df = df[df[data_label] != 10]
+df = df[df[data_label] != 8]
 
 # Add cluster size information
 sizes = df[data_label].value_counts().reset_index()
